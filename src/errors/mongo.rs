@@ -5,7 +5,7 @@ use mongodb::error::{
     WriteError, WriteFailure,
 };
 
-use crate::utils::regex::REGEX_DUPLICATE_KEY;
+use crate::{database::Collection, utils::regex::REGEX_DUPLICATE_KEY};
 
 const DEFAULT_ERROR_MESSAGE: &str = "Something went wrong, please try again later or contact us.";
 
@@ -37,14 +37,22 @@ fn capture(message: &str) -> (StatusCode, String) {
     let default_error_message = DEFAULT_ERROR_MESSAGE.to_string();
 
     if let Some(captures) = REGEX_DUPLICATE_KEY.captures(message) {
+        use Collection::*;
+
         let collection = captures.get(2).unwrap().as_str();
         let field = captures.get(3).unwrap().as_str();
         let value = captures.get(4).unwrap().as_str();
 
-        match (collection, field) {
-            ("users", "email") => (
+        let current = collection.parse::<Collection>().unwrap();
+
+        match (current, field) {
+            (Users, "email") => (
                 StatusCode::BAD_REQUEST,
-                format!("Email {} already exists.", value),
+                format!("Email: `{}` already exists.", value),
+            ),
+            (Users, "username") => (
+                StatusCode::BAD_REQUEST,
+                format!("Username: `{}` already exists.", value),
             ),
             _ => (StatusCode::INTERNAL_SERVER_ERROR, default_error_message),
         }

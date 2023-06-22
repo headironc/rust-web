@@ -9,10 +9,12 @@ edition = "2021"
 actix-web = "4.3.1"
 actix-cors = "0.6.4"
 actix-session = { version = "0.7.2", features = ["redis-rs-session"] }
+actix-identity = "0.5.2"
 env_logger = "0.10.0"
 log = "0.4.17"
 dotenv = "0.15.0"
 thiserror = "1.0.39"
+anyhow = "1.0.71"
 mongodb = "2.4.0"
 serde = { version = "1.0.154", features = ["derive"] }
 serde_json = "1.0.94"
@@ -24,3 +26,6 @@ validator = { version = "0.16.0", features = ["derive"] }
 regex = "1.7.1"
 lazy_static = "1.4.0"
 futures = "0.3.27"
+lettre = { version = "0.10.4", features = ["tokio1", "tokio1-native-tls"] }
+rand = "0.8.5"
+handlebars = "4.3.7"

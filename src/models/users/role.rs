@@ -5,12 +5,13 @@ use serde::{Deserialize, Deserializer, Serialize};
 pub enum Role {
     Root,
     Admin,
-    Staff,
+    Author,
+    User,
 }
 
 impl Default for Role {
     fn default() -> Self {
-        Self::Staff
+        Self::User
     }
 }
 
@@ -24,9 +25,10 @@ impl<'de> Deserialize<'de> for Role {
         match s.as_str() {
             "root" => Ok(Self::Root),
             "admin" => Ok(Self::Admin),
-            "staff" => Ok(Self::Staff),
+            "author" => Ok(Self::Author),
+            "user" => Ok(Self::User),
             _ => Err(serde::de::Error::custom(format!(
-                "未知的角色: {}，应为 root, admin, staff 中的一个",
+                "未知的角色: {}，应为 root, admin, author, user",
                 s
             ))),
         }

@@ -10,13 +10,13 @@ pub fn json_error_handler(error: JsonPayloadError, _req: &HttpRequest) -> Error 
 
     let res = match &error {
         ContentType => HttpResponse::UnsupportedMediaType().json(json!({
-            "message": "Unsupported content type",
+            "message": "Unsupported content type.",
         })),
         Deserialize(error) => HttpResponse::BadRequest().json(json!({
-            "message": error.to_string(),
+            "message": error.to_string() + ".",
         })),
         _ => HttpResponse::BadRequest().json(json!({
-            "message": "Bad request",
+            "message": "Bad request.",
         })),
     };
 
