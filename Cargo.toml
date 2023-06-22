@@ -1,0 +1,26 @@
+[package]
+name = "headiron-rust"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+actix-web = "4.3.1"
+actix-cors = "0.6.4"
+actix-session = { version = "0.7.2", features = ["redis-rs-session"] }
+env_logger = "0.10.0"
+log = "0.4.17"
+dotenv = "0.15.0"
+thiserror = "1.0.39"
+mongodb = "2.4.0"
+serde = { version = "1.0.154", features = ["derive"] }
+serde_json = "1.0.94"
+serde_repr = "0.1.11"
+serde_with = "3.0.0"
+serde_qs = { version = "0.12.0", features = ["actix4"] }
+argon2 = "0.5.0"
+validator = { version = "0.16.0", features = ["derive"] }
+regex = "1.7.1"
+lazy_static = "1.4.0"
+futures = "0.3.27"
